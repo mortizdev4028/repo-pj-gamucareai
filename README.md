@@ -1,3 +1,7 @@
+# ¡¡IMPORTANTE!!
+
+En la carpeta docs, se encuentran los documentos de memoria y justificación del proyecto.
+
 # GamuCare AI
 
 Aplicacion web para controlar planes de salud veterinarios, prestaciones,
@@ -29,7 +33,7 @@ Candidato de entrega con el alcance funcional congelado y AWS excluido:
 
 ## Componentes
 
-- React, TypeScript y Material UI: interfaz responsive.
+- React, TypeScript y Material UI: interfaz "responsive".
 - FastAPI, SQLAlchemy y Alembic: API y logica de negocio.
 - PostgreSQL: clientes, mascotas, historiales, planes y pagos.
 - Qdrant: documentos, fichas clinicas y eventos vectorizados.
