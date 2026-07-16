@@ -1,0 +1,22 @@
+{
+  "name": "mvp_acceptance_v1",
+  "version": "1.0",
+  "criteria": [
+    {"id": "ACC-001", "area": "usuarios", "check": "roles_present", "description": "Existen perfiles clinic, staff, owner y technical"},
+    {"id": "ACC-002", "area": "usuarios", "check": "owner_accounts_linked", "description": "Cada propietario activo dispone de una cuenta enlazada"},
+    {"id": "ACC-003", "area": "pacientes", "check": "active_pets_present", "description": "La base contiene mascotas activas"},
+    {"id": "ACC-004", "area": "pacientes", "check": "clinical_history_present", "description": "Existen eventos clínicos asociados a mascotas"},
+    {"id": "ACC-005", "area": "planes", "check": "plans_for_both_species", "description": "Hay planes LifeCare para perros y gatos"},
+    {"id": "ACC-006", "area": "planes", "check": "active_subscriptions_present", "description": "Existen suscripciones activas o próximas a vencer"},
+    {"id": "ACC-007", "area": "planes", "check": "installments_consistent", "description": "Las cuotas pagadas nunca superan el total de cuotas"},
+    {"id": "ACC-008", "area": "prevencion", "check": "risk_rules_sourced", "description": "Las reglas preventivas activas tienen fuente trazable"},
+    {"id": "ACC-009", "area": "prevencion", "check": "no_duplicate_active_alerts", "description": "No existen avisos activos duplicados para la misma mascota y regla"},
+    {"id": "ACC-010", "area": "vetia", "check": "rag_documents_ingested", "description": "La base documental contiene documentos ingeridos"},
+    {"id": "ACC-011", "area": "vetia", "check": "chat_sessions_traceable", "description": "Las conversaciones pueden quedar asociadas a usuario y mascota"},
+    {"id": "ACC-012", "area": "seguridad", "check": "password_policy_enabled", "description": "La política de contraseña exige al menos 12 caracteres"},
+    {"id": "ACC-013", "area": "seguridad", "check": "lockout_enabled", "description": "El bloqueo por intentos fallidos está habilitado"},
+    {"id": "ACC-014", "area": "seguridad", "check": "jwt_secret_not_default", "description": "JWT_SECRET no utiliza el valor de ejemplo"},
+    {"id": "ACC-015", "area": "auditoria", "check": "audit_table_available", "description": "El modelo de auditoría está disponible"},
+    {"id": "ACC-016", "area": "integracion", "check": "wakyma_traceability_available", "description": "Los lotes de importación simulada disponen de trazabilidad"}
+  ]
+}

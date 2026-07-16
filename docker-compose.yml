@@ -1,0 +1,260 @@
+name: gamucare-ai
+
+x-default-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: gamucare-postgres
+    restart: unless-stopped
+    logging: *default-logging
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-gamucare}
+      POSTGRES_USER: ${POSTGRES_USER:-gamucare}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-gamucare_dev_password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-gamucare} -d ${POSTGRES_DB:-gamucare}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks:
+      - backend
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: gamucare-qdrant
+    restart: unless-stopped
+    logging: *default-logging
+    volumes:
+      - qdrant_data:/qdrant/storage
+    ports:
+      - "127.0.0.1:6333:6333"
+    healthcheck:
+      test: ["CMD-SHELL", "test -e /qdrant/storage || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - backend
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: gamucare-ollama
+    restart: unless-stopped
+    logging: *default-logging
+    environment:
+      OLLAMA_KEEP_ALIVE: 10m
+      OLLAMA_CONTEXT_LENGTH: ${OLLAMA_CONTEXT_LENGTH:-4096}
+    volumes:
+      - ollama_data:/root/.ollama
+    ports:
+      - "127.0.0.1:11434:11434"
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 10s
+      retries: 30
+      start_period: 20s
+    networks:
+      - backend
+
+  ollama-init:
+    image: ollama/ollama:latest
+    container_name: gamucare-ollama-init
+    profiles: ["setup"]
+    logging: *default-logging
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      OLLAMA_BASE_MODEL: ${OLLAMA_BASE_MODEL:-llama3.2:3b}
+      OLLAMA_CHAT_MODEL: ${OLLAMA_CHAT_MODEL:-gamucare-llm}
+      OLLAMA_EMBED_MODEL: ${OLLAMA_EMBED_MODEL:-nomic-embed-text}
+    volumes:
+      - ./ollama/Modelfile:/model/Modelfile:ro
+    depends_on:
+      ollama:
+        condition: service_healthy
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - >-
+        ollama pull "$${OLLAMA_BASE_MODEL}" &&
+        ollama pull "$${OLLAMA_EMBED_MODEL}" &&
+        ollama create "$${OLLAMA_CHAT_MODEL}" -f /model/Modelfile
+    networks:
+      - backend
+
+  api:
+    build:
+      context: ./backend
+    container_name: gamucare-api
+    restart: unless-stopped
+    logging: *default-logging
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://gamucare:gamucare_dev_password@postgres:5432/gamucare}
+      QDRANT_URL: ${QDRANT_URL:-http://qdrant:6333}
+      OLLAMA_URL: ${OLLAMA_URL:-http://ollama:11434}
+      LOG_FILE: ${LOG_FILE:-/var/log/gamucare/api.jsonl}
+      LOG_MAX_BYTES: ${LOG_MAX_BYTES:-10485760}
+      LOG_BACKUP_COUNT: ${LOG_BACKUP_COUNT:-5}
+      RAG_DOCUMENTS_PATH: /app/data/rag
+      RAG_EXTERNAL_DOCUMENTS_PATH: /app/data/rag_external
+      RAG_SOURCE_MANIFEST: /app/data/rag_sources/sources.json
+      RAG_EVALUATION_DATASET: /app/data/evaluation/rag_cases_v2.json
+      SYSTEM_ACCEPTANCE_DATASET: /app/data/evaluation/acceptance_criteria_v1.json
+      ALERT_EVALUATION_DATASET: /app/data/evaluation/alert_cases_v1.json
+      QUALITY_REPORTS_PATH: /app/data/reports
+      QUALITY_BASE_URL: http://localhost:8000
+    volumes:
+      - ./data:/app/data
+      - app_logs:/var/log/gamucare
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+      ollama:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/live')"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    networks:
+      - backend
+
+  web:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: ${VITE_API_URL:-/api/v1}
+        VITE_APP_ENV: ${VITE_APP_ENV:-demo}
+    container_name: gamucare-web
+    restart: unless-stopped
+    logging: *default-logging
+    ports:
+      - "8080:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - frontend
+      - backend
+
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: gamucare-postgres-exporter
+    profiles: ["monitoring"]
+    restart: unless-stopped
+    logging: *default-logging
+    environment:
+      DATA_SOURCE_NAME: postgresql://${POSTGRES_USER:-gamucare}:${POSTGRES_PASSWORD:-gamucare_dev_password}@postgres:5432/${POSTGRES_DB:-gamucare}?sslmode=disable
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - backend
+
+  blackbox-exporter:
+    image: prom/blackbox-exporter:latest
+    container_name: gamucare-blackbox-exporter
+    profiles: ["monitoring"]
+    restart: unless-stopped
+    logging: *default-logging
+    command:
+      - --config.file=/etc/blackbox_exporter/config.yml
+    volumes:
+      - ./monitoring/blackbox.yml:/etc/blackbox_exporter/config.yml:ro
+    networks:
+      - backend
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: gamucare-alertmanager
+    profiles: ["monitoring"]
+    restart: unless-stopped
+    logging: *default-logging
+    command:
+      - --config.file=/etc/alertmanager/alertmanager.yml
+      - --storage.path=/alertmanager
+    volumes:
+      - ./monitoring/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+      - alertmanager_data:/alertmanager
+    ports:
+      - "127.0.0.1:9093:9093"
+    networks:
+      - backend
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: gamucare-prometheus
+    profiles: ["monitoring"]
+    restart: unless-stopped
+    logging: *default-logging
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=15d
+      - --web.enable-lifecycle
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/alerts.yml:/etc/prometheus/rules/alerts.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "127.0.0.1:9090:9090"
+    depends_on:
+      api:
+        condition: service_healthy
+      postgres-exporter:
+        condition: service_started
+      blackbox-exporter:
+        condition: service_started
+      alertmanager:
+        condition: service_started
+    networks:
+      - backend
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: gamucare-grafana
+    profiles: ["monitoring"]
+    restart: unless-stopped
+    logging: *default-logging
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-gamucare}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - backend
+
+volumes:
+  postgres_data:
+  qdrant_data:
+  ollama_data:
+  prometheus_data:
+  grafana_data:
+  alertmanager_data:
+  app_logs:
+
+networks:
+  frontend:
+  backend:

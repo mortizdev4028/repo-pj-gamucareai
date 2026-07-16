@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0",
+  "reviewed_at": "2026-07-16",
+  "notice": "Los ficheros se descargan desde sus organismos oficiales y no se redistribuyen dentro del repositorio. Revise las condiciones de uso de cada fuente antes de emplearla fuera del MVP.",
+  "sources": [
+    {
+      "id": "wsava-vaccination-2024-es",
+      "enabled": true,
+      "format": "pdf",
+      "filename": "wsava-vaccination-2024-es.pdf",
+      "url": "https://wsava.org/wp-content/uploads/2024/05/ESP.-J-of-Small-Animal-Practice-2024-Squires-2024-guidelines-for-the-vaccination-of-dogs-and-cats-compiled-by-the.pdf",
+      "metadata": {
+        "title": "Pautas para la vacunacion de perros y gatos 2024",
+        "source": "WSAVA Vaccination Guidelines Group",
+        "url": "https://wsava.org/Global-Guidelines/Vaccination-Guidelines/",
+        "date": "2024-01-01",
+        "country": "GLOBAL",
+        "category": "vaccination",
+        "language": "es",
+        "audience": "clinic, owner",
+        "source_type": "guideline",
+        "trust_level": "official",
+        "last_reviewed": "2026-07-16",
+        "tags": "perro, gato, vacuna, rabia, cachorro, gatito, refuerzo"
+      }
+    },
+    {
+      "id": "aaha-senior-care-2023",
+      "enabled": true,
+      "format": "pdf",
+      "filename": "aaha-senior-care-2023.pdf",
+      "url": "https://www.aaha.org/wp-content/uploads/globalassets/02-guidelines/2023-aaha-senior-care-guidelines-for-dogs-and-cats/resources/2023-aaha-senior-care-guidelines-for-dogs-and-cats.pdf",
+      "metadata": {
+        "title": "2023 AAHA Senior Care Guidelines for Dogs and Cats",
+        "source": "American Animal Hospital Association (AAHA)",
+        "url": "https://www.aaha.org/resources/2023-aaha-senior-care-guidelines-for-dogs-and-cats/",
+        "date": "2023-01-01",
+        "country": "GLOBAL",
+        "category": "senior_care",
+        "language": "en",
+        "audience": "clinic",
+        "source_type": "guideline",
+        "trust_level": "official",
+        "last_reviewed": "2026-07-16",
+        "tags": "senior, geriatric, preventive care, dog, cat, screening"
+      }
+    },
+    {
+      "id": "esccap-vector-borne-gl5-2024",
+      "enabled": true,
+      "format": "pdf",
+      "filename": "esccap-gl5-vector-borne-2024.pdf",
+      "url": "https://www.esccap.org/uploads/docs/32ir16g1_0775_ESCCAP_Guideline_GL5_20241203_1p.pdf",
+      "metadata": {
+        "title": "Control of Vector-Borne Diseases in Dogs and Cats - GL5",
+        "source": "ESCCAP",
+        "url": "https://www.esccap.org/guidelines/gl5/",
+        "date": "2024-12-03",
+        "country": "EU",
+        "category": "vector_borne",
+        "language": "en",
+        "audience": "clinic, owner",
+        "source_type": "guideline",
+        "trust_level": "official",
+        "last_reviewed": "2026-07-16",
+        "tags": "garrapata, mosquito, flebotomo, leishmania, dirofilaria, babesia, ehrlichia"
+      }
+    },
+    {
+      "id": "fediaf-nutritional-guidelines-2025",
+      "enabled": true,
+      "format": "pdf",
+      "filename": "fediaf-nutritional-guidelines-2025.pdf",
+      "url": "https://europeanpetfood.org/wp-content/uploads/2025/09/FEDIAF-Nutritional-Guidelines_2025-ONLINE.pdf",
+      "metadata": {
+        "title": "FEDIAF Nutritional Guidelines for Complete and Complementary Pet Food 2025",
+        "source": "FEDIAF - EuropeanPetFood",
+        "url": "https://europeanpetfood.org/self-regulation/nutritional-guidelines/",
+        "date": "2025-01-01",
+        "country": "EU",
+        "category": "nutrition",
+        "language": "en",
+        "audience": "clinic",
+        "source_type": "guideline",
+        "trust_level": "official",
+        "last_reviewed": "2026-07-16",
+        "tags": "nutrition, dog, cat, nutrients, energy, life stage, body condition"
+      }
+    },
+    {
+      "id": "iris-ckd-staging",
+      "enabled": true,
+      "format": "html",
+      "filename": "iris-ckd-staging.html",
+      "url": "https://www.iris-kidney.com/iris-staging-system",
+      "metadata": {
+        "title": "IRIS Staging System for Chronic Kidney Disease",
+        "source": "International Renal Interest Society (IRIS)",
+        "url": "https://www.iris-kidney.com/iris-staging-system",
+        "country": "GLOBAL",
+        "category": "renal",
+        "language": "en",
+        "audience": "clinic",
+        "source_type": "guideline_web",
+        "trust_level": "official",
+        "last_reviewed": "2026-07-16",
+        "tags": "renal, kidney, CKD, creatinine, SDMA, proteinuria, blood pressure"
+      }
+    },
+    {
+      "id": "eu-pet-travel-es",
+      "enabled": true,
+      "format": "html",
+      "filename": "eu-pet-travel-es.html",
+      "url": "https://europa.eu/youreurope/citizens/travel/carry/pets-and-other-animals/index_es.htm",
+      "metadata": {
+        "title": "Viajes con mascotas y otros animales en la Union Europea",
+        "source": "Union Europea - Your Europe",
+        "url": "https://europa.eu/youreurope/citizens/travel/carry/pets-and-other-animals/index_es.htm",
+        "country": "EU",
+        "category": "travel",
+        "language": "es",
+        "audience": "owner, clinic",
+        "source_type": "official_web",
+        "trust_level": "official",
+        "last_reviewed": "2026-07-16",
+        "tags": "viaje, pasaporte, microchip, rabia, union europea, perro, gato, huron"
+      }
+    },
+    {
+      "id": "mapa-viajar-mascotas",
+      "enabled": true,
+      "format": "html",
+      "filename": "mapa-viajar-perros-gatos-hurones.html",
+      "url": "https://www.mapa.gob.es/es/ganaderia/temas/comercio-exterior-ganadero/desplazamiento-animales-compania/viajar-perros-gatos-hurones",
+      "metadata": {
+        "title": "Viajar con perros, gatos y hurones",
+        "source": "Ministerio de Agricultura, Pesca y Alimentacion (MAPA)",
+        "url": "https://www.mapa.gob.es/es/ganaderia/temas/comercio-exterior-ganadero/desplazamiento-animales-compania/viajar-perros-gatos-hurones",
+        "country": "ES",
+        "category": "travel",
+        "language": "es",
+        "audience": "owner, clinic",
+        "source_type": "official_web",
+        "trust_level": "official",
+        "last_reviewed": "2026-07-16",
+        "tags": "viaje, espana, exportacion, regreso, certificado, perro, gato, huron"
+      }
+    }
+  ]
+}

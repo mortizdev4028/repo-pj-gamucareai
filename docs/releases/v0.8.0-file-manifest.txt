@@ -1,0 +1,24 @@
+GamuCare AI v0.8.0 - manifest de ficheros
+
+M = modificado
+A = anadido
+D = eliminado
+
+M  CHANGELOG.md
+M  README.md
+M  backend/app/main.py
+M  backend/app/routers/dashboard.py
+M  backend/app/schemas.py
+A  backend/app/services/dashboard.py
+A  backend/tests/test_dashboard.py
+M  docs/ARCHITECTURE.md
+M  docs/RELEASE_HISTORY.md
+M  docs/USER_GUIDE.md
+A  docs/architecture/decisions/ADR-007-role-aware-live-dashboards.md
+A  docs/releases/v0.8.0-file-manifest.txt
+A  docs/releases/v0.8.0.md
+M  frontend/package-lock.json
+M  frontend/package.json
+M  frontend/src/pages/DashboardPage.tsx
+M  frontend/src/types.ts
+A  scripts/upgrade-v0.8.ps1

@@ -1,0 +1,70 @@
+{
+  "name": "preventive_alert_cases_v1",
+  "version": "1.0",
+  "reference_date": "2026-07-16",
+  "cases": [
+    {
+      "id": "ALR-001",
+      "description": "Perro senior",
+      "pet": {"species": "dog", "breed": "Mestizo", "birth_date": "2016-01-01", "weight_kg": 18.0},
+      "conditions": {"species": "dog", "min_age_years": 8},
+      "expected": true
+    },
+    {
+      "id": "ALR-002",
+      "description": "Perro adulto no senior",
+      "pet": {"species": "dog", "breed": "Mestizo", "birth_date": "2022-01-01", "weight_kg": 18.0},
+      "conditions": {"species": "dog", "min_age_years": 8},
+      "expected": false
+    },
+    {
+      "id": "ALR-003",
+      "description": "Otitis recurrente en dos episodios",
+      "pet": {"species": "dog", "breed": "Cocker Spaniel", "birth_date": "2019-01-01", "weight_kg": 14.0},
+      "events": [
+        {"days_ago": 180, "title": "Otitis externa", "description": "Primer episodio"},
+        {"days_ago": 30, "title": "Otitis recurrente", "description": "Segundo episodio"}
+      ],
+      "conditions": {"history_contains": ["otitis"], "history_min_occurrences": 2, "history_lookback_months": 24},
+      "expected": true
+    },
+    {
+      "id": "ALR-004",
+      "description": "Un único episodio no activa recurrencia",
+      "pet": {"species": "dog", "breed": "Cocker Spaniel", "birth_date": "2019-01-01", "weight_kg": 14.0},
+      "events": [{"days_ago": 30, "title": "Otitis externa", "description": "Episodio aislado"}],
+      "conditions": {"history_contains": ["otitis"], "history_min_occurrences": 2, "history_lookback_months": 24},
+      "expected": false
+    },
+    {
+      "id": "ALR-005",
+      "description": "Aumento de peso superior al diez por ciento",
+      "pet": {"species": "dog", "breed": "Labrador Retriever", "birth_date": "2018-01-01", "weight_kg": 33.5},
+      "events": [{"days_ago": 120, "title": "Control de peso", "description": "Peso previo", "weight_kg": 30.0}],
+      "conditions": {"weight_change_pct_gte": 10, "weight_lookback_months": 6, "minimum_weight_records": 2},
+      "expected": true
+    },
+    {
+      "id": "ALR-006",
+      "description": "Variación de peso pequeña",
+      "pet": {"species": "dog", "breed": "Labrador Retriever", "birth_date": "2018-01-01", "weight_kg": 30.8},
+      "events": [{"days_ago": 120, "title": "Control de peso", "description": "Peso previo", "weight_kg": 30.0}],
+      "conditions": {"weight_change_pct_gte": 10, "weight_lookback_months": 6, "minimum_weight_records": 2},
+      "expected": false
+    },
+    {
+      "id": "ALR-007",
+      "description": "Raza braquicéfala incluida",
+      "pet": {"species": "dog", "breed": "Bulldog Francés", "birth_date": "2021-01-01", "weight_kg": 12.0},
+      "conditions": {"breeds": ["Bulldog Francés", "Carlino", "Bóxer"]},
+      "expected": true
+    },
+    {
+      "id": "ALR-008",
+      "description": "Raza no incluida",
+      "pet": {"species": "dog", "breed": "Beagle", "birth_date": "2021-01-01", "weight_kg": 12.0},
+      "conditions": {"breeds": ["Bulldog Francés", "Carlino", "Bóxer"]},
+      "expected": false
+    }
+  ]
+}

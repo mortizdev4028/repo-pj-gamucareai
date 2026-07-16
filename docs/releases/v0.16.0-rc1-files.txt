@@ -1,0 +1,34 @@
+# Manifest GamuCare AI v0.16.0-rc1
+
+ADDED backend/app/scripts/release_snapshot.py
+ADDED backend/tests/test_release_snapshot.py
+ADDED docs/DATA_MODEL.md
+ADDED docs/DELIVERY_CHECKLIST.md
+ADDED docs/DEMO_GUIDE.md
+ADDED docs/ENDPOINTS.md
+ADDED docs/FINAL_ARCHITECTURE.md
+ADDED docs/INSTALLATION.md
+ADDED docs/TROUBLESHOOTING.md
+ADDED docs/architecture/decisions/ADR-015-release-candidate-and-scope-freeze.md
+ADDED docs/releases/v0.16.0-rc1-validation.md
+ADDED docs/releases/v0.16.0-rc1.md
+ADDED evidence/README.md
+ADDED scripts/generate-evidence.ps1
+ADDED scripts/reset-demo.ps1
+ADDED scripts/upgrade-v0.16-rc1.ps1
+MODIFIED .env.example
+MODIFIED .gitignore
+MODIFIED CHANGELOG.md
+MODIFIED README.md
+MODIFIED backend/app/version.py
+MODIFIED backend/tests/test_health.py
+MODIFIED backend/tests/test_system_evaluation.py
+MODIFIED docker-compose.yml
+MODIFIED docs/DECISIONS.md
+MODIFIED docs/RELEASE_HISTORY.md
+MODIFIED frontend/Dockerfile
+MODIFIED frontend/package-lock.json
+MODIFIED frontend/package.json
+MODIFIED frontend/src/components/AppShell.tsx
+MODIFIED frontend/src/pages/LoginPage.tsx
+MODIFIED frontend/src/version.ts

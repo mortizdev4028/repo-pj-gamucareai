@@ -1,0 +1,4 @@
+entity_type,external_id,owner_external_id,pet_external_id,first_name,last_name,phone,email,address,name,species,breed,birth_date,sex,weight_kg,neutered,microchip,allergies,chronic_conditions,event_date,event_type,title,description,diagnosis,treatment,visible_to_owner,is_active
+owner,WK-OWN-IMPORT-02,,,Daniel,Lozano Demo,600900002,daniel.import@example.test,"Avenida Ficticia 2, Madrid",,,,,,,,,,,,,,,,,,true
+pet,WK-PET-IMPORT-02,WK-OWN-IMPORT-02,,,,,,,Kira,dog,Golden Retriever,2020-03-15,female,31.8,true,724098199999902,,Otitis recurrente ficticia.,,,,,,,,true
+clinical_event,WK-EVT-IMPORT-02,,WK-PET-IMPORT-02,,,,,,,,,,,,,,,,2026-04-18T09:15:00+00:00,consultation,Revision de oidos,Otitis externa leve ficticia.,Otitis externa ficticia,Tratamiento topico ficticio,true,

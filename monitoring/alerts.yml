@@ -1,0 +1,68 @@
+groups:
+  - name: gamucare-availability
+    rules:
+      - alert: GamuCareServiceDown
+        expr: probe_success == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: gamucare
+        annotations:
+          summary: "Servicio local no disponible"
+          description: "El endpoint {{ $labels.instance }} no responde correctamente desde hace al menos dos minutos."
+
+      - alert: GamuCarePostgresExporterDown
+        expr: pg_up == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: postgres
+        annotations:
+          summary: "PostgreSQL no esta disponible"
+          description: "El exporter no puede consultar PostgreSQL."
+
+  - name: gamucare-api
+    rules:
+      - alert: GamuCareApiHighErrorRate
+        expr: |
+          sum(rate(gamucare_http_requests_total{status_code=~"5.."}[5m]))
+          /
+          clamp_min(sum(rate(gamucare_http_requests_total[5m])), 0.001)
+          > 0.05
+        for: 5m
+        labels:
+          severity: warning
+          service: api
+        annotations:
+          summary: "Tasa elevada de errores en la API"
+          description: "Mas del 5% de las peticiones han terminado en error 5xx durante cinco minutos."
+
+      - alert: GamuCareApiHighLatency
+        expr: histogram_quantile(0.95, sum(rate(gamucare_http_request_duration_seconds_bucket[5m])) by (le)) > 2
+        for: 5m
+        labels:
+          severity: warning
+          service: api
+        annotations:
+          summary: "Latencia elevada en la API"
+          description: "El percentil 95 supera dos segundos durante cinco minutos."
+
+      - alert: GamuCareOllamaErrors
+        expr: sum(rate(gamucare_ollama_requests_total{outcome="error"}[10m])) > 0
+        for: 2m
+        labels:
+          severity: warning
+          service: ollama
+        annotations:
+          summary: "Errores al consultar Ollama"
+          description: "Se han registrado fallos en operaciones de chat o embeddings."
+
+      - alert: GamuCareQdrantErrors
+        expr: sum(rate(gamucare_qdrant_searches_total{outcome="error"}[10m])) > 0
+        for: 2m
+        labels:
+          severity: warning
+          service: qdrant
+        annotations:
+          summary: "Errores en busquedas vectoriales"
+          description: "VetIA ha registrado fallos al consultar Qdrant."

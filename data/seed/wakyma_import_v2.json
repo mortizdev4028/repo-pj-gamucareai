@@ -1,0 +1,47 @@
+{
+  "source": "wakyma_mock",
+  "schema_version": "2.0",
+  "disclaimer": "Datos completamente ficticios para probar el conector del TFM.",
+  "owners": [
+    {
+      "external_id": "WK-OWN-IMPORT-01",
+      "first_name": "Claudia",
+      "last_name": "Herranz Demo",
+      "phone": "600900001",
+      "email": "claudia.import@example.test",
+      "address": "Calle Ficticia 1, Madrid",
+      "is_active": true
+    }
+  ],
+  "pets": [
+    {
+      "external_id": "WK-PET-IMPORT-01",
+      "owner_external_id": "WK-OWN-IMPORT-01",
+      "name": "Milo",
+      "species": "cat",
+      "breed": "Comun Europeo",
+      "birth_date": "2021-09-10",
+      "sex": "male",
+      "weight_kg": 5.4,
+      "neutered": true,
+      "microchip": "724098199999901",
+      "allergies": null,
+      "chronic_conditions": "Antecedente digestivo leve ficticio.",
+      "is_active": true
+    }
+  ],
+  "clinical_events": [
+    {
+      "external_id": "WK-EVT-IMPORT-01",
+      "pet_external_id": "WK-PET-IMPORT-01",
+      "event_date": "2026-05-12T10:30:00+00:00",
+      "event_type": "consultation",
+      "title": "Consulta digestiva",
+      "description": "Episodio digestivo leve resuelto. Dato ficticio.",
+      "diagnosis": "Gastroenteritis leve ficticia",
+      "treatment": "Dieta digestiva temporal ficticia",
+      "weight_kg": 5.4,
+      "visible_to_owner": true
+    }
+  ]
+}

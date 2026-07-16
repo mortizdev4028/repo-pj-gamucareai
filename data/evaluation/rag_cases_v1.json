@@ -1,0 +1,22 @@
+[
+  {"id":"G01","scope":"general","question":"Que vacunas basicas se recomiendan para un cachorro?","expected_categories":["vaccination"],"expected_sources":["WSAVA"],"answerable":true},
+  {"id":"G02","scope":"general","question":"Que vacunas basicas se recomiendan para un gato?","expected_categories":["vaccination"],"expected_sources":["WSAVA"],"answerable":true},
+  {"id":"G03","scope":"general","question":"Que documentos necesita mi perro para viajar desde Espana a Francia?","expected_categories":["travel","procedures"],"expected_sources":["MAPA","Union Europea"],"answerable":true},
+  {"id":"G04","scope":"general","question":"Cuanto tiempo debe pasar desde la primera vacuna de la rabia para viajar por la UE?","expected_categories":["travel","vaccination"],"expected_sources":["MAPA","Union Europea"],"answerable":true},
+  {"id":"G05","scope":"general","question":"Que debo revisar antes de viajar con mi mascota fuera de la Union Europea?","expected_categories":["travel","procedures"],"expected_sources":["MAPA"],"answerable":true},
+  {"id":"G06","scope":"general","question":"Que riesgos parasitarios hay para un perro que viaja por Europa?","expected_categories":["parasites","vector_borne","travel"],"expected_sources":["ESCCAP"],"answerable":true},
+  {"id":"G07","scope":"general","question":"Por que es importante controlar el peso y la condicion corporal?","expected_categories":["nutrition"],"expected_sources":["WSAVA"],"answerable":true},
+  {"id":"G08","scope":"general","question":"Que cuidados preventivos necesita una mascota senior?","expected_categories":["senior_care"],"expected_sources":["AAHA"],"answerable":true},
+  {"id":"G09","scope":"general","question":"Como se realiza el seguimiento de una enfermedad renal cronica en gatos y perros?","expected_categories":["renal"],"expected_sources":["IRIS"],"answerable":true},
+  {"id":"G10","scope":"general","question":"Que enfermedades pueden transmitir mosquitos y garrapatas a perros y gatos?","expected_categories":["vector_borne"],"expected_sources":["ESCCAP"],"answerable":true},
+  {"id":"G11","scope":"general","question":"Como configuro una impresora laser en Windows?","expected_categories":[],"expected_sources":[],"answerable":false},
+  {"id":"G12","scope":"general","question":"Cual es la capital de Australia?","expected_categories":[],"expected_sources":[],"answerable":false},
+  {"id":"C01","scope":"clinical","question":"Que pacientes tienen otitis recurrente?","expected_pet_names":["Kira"],"expected_event_types":["consultation","checkup"],"answerable":true},
+  {"id":"C02","scope":"clinical","question":"Que gatos presentan seguimiento renal repetido?","expected_pet_names":["Mia"],"expected_event_types":["laboratory","consultation"],"answerable":true},
+  {"id":"C03","scope":"clinical","question":"Que pacientes tienen problemas articulares recurrentes?","expected_pet_names":["Luna","Rocky","Salem"],"expected_event_types":["consultation","checkup"],"answerable":true},
+  {"id":"C04","scope":"clinical","question":"Encuentra episodios respiratorios relacionados con calor o ejercicio","expected_pet_names":["Max","Bruno","Simba"],"expected_event_types":["consultation","checkup"],"answerable":true},
+  {"id":"C05","scope":"clinical","question":"Que paciente tiene sensibilidad digestiva recurrente?","expected_pet_names":["Nina"],"expected_event_types":["consultation","nutrition"],"answerable":true},
+  {"id":"C06","scope":"clinical","question":"Que paciente senior presenta perdida de peso en seguimiento?","expected_pet_names":["Cleo"],"expected_event_types":["nutrition","checkup"],"answerable":true},
+  {"id":"C07","scope":"clinical","question":"Busca historiales sobre reparacion de placas base de ordenadores","expected_pet_names":[],"expected_event_types":[],"answerable":false},
+  {"id":"C08","scope":"clinical","question":"Que perros braquicefalicos presentan intolerancia al ejercicio o respiracion ruidosa?","expected_pet_names":["Max","Bruno","Simba"],"expected_event_types":["consultation","checkup"],"answerable":true}
+]
