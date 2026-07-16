@@ -4,6 +4,8 @@
 
 En la carpeta docs, se encuentran los documentos de memoria y justificación del proyecto.
 
+En la defensa se ha indicado que no hay CI/CD, en realidad no es del todo cierto, CI si existe pero no hay CD. Queda pendiente como paso previo a despliegue en CLOUD.
+
 Instrucciones de uso: (docjer desktop)
 
 Set-ExecutionPolicy -Scope Process Bypass
