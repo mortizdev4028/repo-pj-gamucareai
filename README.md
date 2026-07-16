@@ -1,6 +1,15 @@
 # ¡¡IMPORTANTE!!
 
+## Notas:
+
 En la carpeta docs, se encuentran los documentos de memoria y justificación del proyecto.
+
+Instrucciones de uso: (docjer desktop)
+
+Set-ExecutionPolicy -Scope Process Bypass
+.\scripts\setup-gpu.ps1
+.\scripts\download-rag-sources.ps1
+.\scripts\reset-demo.ps1 -Force
 
 # GamuCare AI
 
